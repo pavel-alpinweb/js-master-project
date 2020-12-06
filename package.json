@@ -1,0 +1,24 @@
+{
+  "name": "js-master-project",
+  "version": "1.0.0",
+  "description": "Pure JavaScript Excel Application",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pavel-alpinweb/js-master-project.git"
+  },
+  "keywords": [
+    "js",
+    "javascript",
+    "excel"
+  ],
+  "author": "Pavel-Alpinweb",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pavel-alpinweb/js-master-project/issues"
+  },
+  "homepage": "https://github.com/pavel-alpinweb/js-master-project#readme"
+}
