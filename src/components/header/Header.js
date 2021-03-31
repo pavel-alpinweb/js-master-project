@@ -8,9 +8,9 @@ export class Header extends ExcelComponent {
       listeners: ['click'],
     });
   }
-  // onClick(event) {
-  //   console.log('On click Header', event);
-  // }
+  onClick(event) {
+    console.log('On click Header', event);
+  }
   toHTML() {
     return `
       <input type="text" class="input" value="Новая таблица" />

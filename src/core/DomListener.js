@@ -21,9 +21,15 @@ export class DomListener {
             `Method '${method}' is not exist in component: ${this.name}`
         );
       }
-      this.$root.on(listener, this[method].bind(this));
+      this[method] = this[method].bind(this);
+      this.$root.on(listener, this[method]);
     });
   }
 
-  removeDOMListeners() {}
+  removeDOMListeners() {
+    this.listeners.forEach((listener) => {
+      const method = getMethodName(listener);
+      this.$root.off(listener, this[method]);
+    });
+  }
 }
