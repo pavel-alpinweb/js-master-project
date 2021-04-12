@@ -7,12 +7,20 @@ const CODES = {
 //   <div className="cell" contentEditable="">B2</div>;
 // }
 
-function toColumn(content) {
-  return `
+function toColumn(content, editable = true) {
+  const column = editable ?
+  `
+    <div class="cell" contenteditable="">
+        ${content}
+    </div>
+   `:
+    `
     <div class="column">
       ${content}
     </div>
-  `;
+  `
+   ;
+  return column;
 }
 
 function createRow(content = '') {
@@ -34,16 +42,22 @@ function toChar(_, index) {
 
 export function createTable(rowsCount = 15) {
   const colsCount = CODES.Z - CODES.A + 1;
-  const cols = new Array(colsCount)
+  const headCols = new Array(colsCount)
       .fill('')
       .map(toChar)
-      .map(toColumn)
+      .map((el) => {
+        return toColumn(el, false);
+      })
       .join('');
-
+  let editableCols = [];
+  for (let i = 0; i < colsCount; i++) {
+    editableCols.push(toColumn('', true));
+  }
+  editableCols = editableCols.join('');
   const rows = [];
-  rows.push(createRow(cols));
+  rows.push(createRow(headCols));
   for (let i = 0; i < rowsCount; i++) {
-    rows.push(createRow());
+    rows.push(createRow(editableCols));
   }
   return rows.join('');
 }
