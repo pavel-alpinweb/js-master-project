@@ -7,27 +7,27 @@ const CODES = {
 //   <div className="cell" contentEditable="">B2</div>;
 // }
 
-function toColumn(content, editable = true) {
-  const column = editable ?
-  `
-    <div class="cell" contenteditable="">
-        ${content}
-    </div>
-   `:
-    `
+function toColumn(content) {
+  return `
     <div class="column">
       ${content}
     </div>
-  `
-   ;
-  return column;
+  `;
 }
 
-function createRow(content = '') {
+function toCell(content) {
+  return `
+    <div class="cell" contenteditable="">
+        ${content}
+    </div>
+   `;
+}
+
+function createRow(index, content = '') {
   return `
     <div class="row">
         <div class="row-info">
-        
+            ${index ? index : ''}
         </div>
         <div class="row-data">
             ${content}
@@ -42,22 +42,19 @@ function toChar(_, index) {
 
 export function createTable(rowsCount = 15) {
   const colsCount = CODES.Z - CODES.A + 1;
-  const headCols = new Array(colsCount)
+  const cols = new Array(colsCount)
       .fill('')
       .map(toChar)
-      .map((el) => {
-        return toColumn(el, false);
-      })
+      .map(toColumn)
       .join('');
-  let editableCols = [];
-  for (let i = 0; i < colsCount; i++) {
-    editableCols.push(toColumn('', true));
-  }
-  editableCols = editableCols.join('');
+  const cells = new Array(colsCount)
+      .fill('')
+      .map(toCell)
+      .join('');
   const rows = [];
-  rows.push(createRow(headCols));
+  rows.push(createRow(null, cols));
   for (let i = 0; i < rowsCount; i++) {
-    rows.push(createRow(editableCols));
+    rows.push(createRow(i + 1, cells));
   }
   return rows.join('');
 }
