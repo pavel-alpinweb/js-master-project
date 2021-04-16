@@ -11,6 +11,7 @@ function toColumn(content) {
   return `
     <div class="column">
       ${content}
+      <div class="col-resize"></div>
     </div>
   `;
 }
@@ -24,10 +25,12 @@ function toCell(content) {
 }
 
 function createRow(index, content = '') {
+  const resizer = index ? '<div class="row-resize"></div>' : '';
   return `
     <div class="row">
         <div class="row-info">
             ${index ? index : ''}
+            ${resizer}
         </div>
         <div class="row-data">
             ${content}
