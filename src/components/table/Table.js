@@ -1,5 +1,6 @@
 import {ExcelComponent} from '@core/ExcelComponent';
 import {createTable} from '@/components/table/table.template';
+import {$} from '@/core/dom';
 
 export class Table extends ExcelComponent {
   static className = 'excel__table';
@@ -14,12 +15,22 @@ export class Table extends ExcelComponent {
   }
   onMousedown(event) {
     if (event.target.dataset.resize) {
-      console.log('On mousedown Table', event.target.dataset.resize);
+      const $target = $(event.target);
+      const $parent = $target.closest('[data-type="resizable"]');
+      const coords = $parent.getCoords();
+
+      document.onmousemove = e => {
+        const delta = Math.floor(e.pageX - coords.right);
+        const value = coords.width + delta;
+        $parent.$el.style.width = value + 'px';
+        console.log(delta);
+      };
+
+      document.onmouseup = e => {
+        document.onmousemove = null;
+      };
     }
   }
-  // onMousemove(event) {
-  //   console.log('On mousemove Table', event);
-  // }
   onMouseup(event) {
     console.log('On mouseup Table', event);
   }
