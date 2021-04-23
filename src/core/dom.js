@@ -1,8 +1,8 @@
 class Dom {
   constructor(selector) {
     this.$el = typeof selector === 'string' ?
-        document.querySelector(selector) :
-        selector;
+      document.querySelector(selector) :
+      selector;
   }
 
   html(html) {
@@ -36,6 +36,12 @@ class Dom {
     } else {
       this.$el.appendChild(node);
     }
+
+    return this;
+  }
+
+  get data() {
+    return this.$el.dataset;
   }
 
   closest(selector) {
@@ -47,12 +53,15 @@ class Dom {
   }
 }
 
+// event.target
 export function $(selector) {
   return new Dom(selector);
 }
 
 $.create = (tagName, classes = '') => {
-  const $el = document.createElement(tagName);
-  $el.classList.add(classes);
-  return $($el);
+  const el = document.createElement(tagName);
+  if (classes) {
+    el.classList.add(classes);
+  }
+  return $(el);
 };
