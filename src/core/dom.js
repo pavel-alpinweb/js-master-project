@@ -13,7 +13,20 @@ class Dom {
     return this.$el.outerHTML.trim();
   }
 
-  
+  width(number = 0) {
+    this.$el.style.width = number + 'px';
+    return this;
+  }
+
+  addClass(string = '') {
+    this.$el.classList.add(string);
+    return this;
+  }
+
+  removeClass(string = '') {
+    this.$el.classList.remove(string);
+    return this;
+  }
 
   clear() {
     this.html('');
