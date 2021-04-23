@@ -20,18 +20,20 @@ export class Table extends ExcelComponent {
       const $resizer = $(event.target);
       const $parent = $resizer.closest('[data-type="resizable"]');
       const coords = $parent.getCoords();
-      console.log();
+      let value = 0;
+      $resizer.addClass('.col-resize--active');
 
       document.onmousemove = e => {
         console.log('mousemove');
         const delta = e.pageX - coords.right;
-        const value = coords.width + delta;
-        $parent.$el.style.width = value + 'px';
-        document.querySelectorAll(`[data-col="${$parent.data.col}"]`)
-            .forEach(el => el.style.width = value + 'px');
+        value = coords.width + delta;
       };
 
       document.onmouseup = () => {
+        $parent.$el.style.width = value + 'px';
+        document.querySelectorAll(`[data-col="${$parent.data.col}"]`)
+            .forEach(el => el.style.width = value + 'px');
+        $resizer.removeClass('.col-resize--active');
         document.onmousemove = null;
       };
     }
