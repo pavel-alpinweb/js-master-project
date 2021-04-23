@@ -43,7 +43,7 @@
     z-index: 5;
     &.row-resize--active {
       opacity: 1;
-      cursor: col-resize;
+      cursor: row-resize;
     }
     &:hover{
       opacity: 1;

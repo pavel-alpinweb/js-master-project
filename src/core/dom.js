@@ -13,8 +13,21 @@ class Dom {
     return this.$el.outerHTML.trim();
   }
 
-  width(number = 0) {
-    this.$el.style.width = number + 'px';
+  width(value = 'auto') {
+    if (typeof value === 'string') {
+      this.$el.style.width = value;
+    } else {
+      this.$el.style.width = value + 'px';
+    }
+    return this;
+  }
+
+  height(value = 'auto') {
+    if (typeof value === 'string') {
+      this.$el.style.height = value;
+    } else {
+      this.$el.style.height = value + 'px';
+    }
     return this;
   }
 
