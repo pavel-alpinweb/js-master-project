@@ -26,6 +26,7 @@
     background: #f8f9fa;
     border-top: none;
     position: relative;
+    user-select: none;
   }
 
   .row-data {
@@ -63,6 +64,7 @@
     border-left: 0;
     height: 100%;
     position: relative;
+    user-select: none;
   }
 
   .cell {
