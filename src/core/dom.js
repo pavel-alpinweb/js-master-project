@@ -30,13 +30,12 @@ class Dom {
     }
     return this;
   }
-  css(stylesList = {}) {
-    for (const style in stylesList) {
-      // eslint-disable-next-line no-prototype-builtins
-      if (stylesList.hasOwnProperty(style)) {
-        this.$el.style[style] = stylesList[style];
-      }
-    }
+  css(styles = {}) {
+    Object
+        .keys(styles)
+        .forEach(key => {
+          this.$el.style[key] = styles[key];
+        });
   }
 
   addClass(string = '') {
