@@ -1,18 +1,21 @@
 import {ExcelComponent} from '@core/ExcelComponent';
 import {createTable} from '@/components/table/table.template';
+import resize from '@/components/table/table.resize';
 
 export class Table extends ExcelComponent {
-  static className = 'excel__table';
+  static className = 'excel__table'
+
   constructor($root) {
     super($root, {
-      name: 'Table',
-      listeners: ['click'],
+      listeners: ['mousedown'],
     });
   }
-  onClick(event) {
-    console.log('On click Table', event);
-  }
+
   toHTML() {
-    return createTable();
+    return createTable(20);
+  }
+
+  onMousedown(event) {
+    resize(event.target, this.$root, Table.className);
   }
 }

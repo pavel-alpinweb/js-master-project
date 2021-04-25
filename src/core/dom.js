@@ -1,8 +1,8 @@
 class Dom {
   constructor(selector) {
     this.$el = typeof selector === 'string' ?
-        document.querySelector(selector) :
-        selector;
+      document.querySelector(selector) :
+      selector;
   }
 
   html(html) {
@@ -11,6 +11,41 @@ class Dom {
       return this;
     }
     return this.$el.outerHTML.trim();
+  }
+
+  width(value = 'auto') {
+    if (typeof value === 'string') {
+      this.$el.style.width = value;
+    } else {
+      this.$el.style.width = value + 'px';
+    }
+    return this;
+  }
+
+  height(value = 'auto') {
+    if (typeof value === 'string') {
+      this.$el.style.height = value;
+    } else {
+      this.$el.style.height = value + 'px';
+    }
+    return this;
+  }
+  css(styles = {}) {
+    Object
+        .keys(styles)
+        .forEach(key => {
+          this.$el.style[key] = styles[key];
+        });
+  }
+
+  addClass(string = '') {
+    this.$el.classList.add(string);
+    return this;
+  }
+
+  removeClass(string = '') {
+    this.$el.classList.remove(string);
+    return this;
   }
 
   clear() {
@@ -36,15 +71,36 @@ class Dom {
     } else {
       this.$el.appendChild(node);
     }
+
+    return this;
+  }
+
+  findAll(selector) {
+    return this.$el.querySelectorAll(selector);
+  }
+
+  get data() {
+    return this.$el.dataset;
+  }
+
+  closest(selector) {
+    return $(this.$el.closest(selector));
+  }
+
+  getCoords() {
+    return this.$el.getBoundingClientRect();
   }
 }
 
+// event.target
 export function $(selector) {
   return new Dom(selector);
 }
 
 $.create = (tagName, classes = '') => {
-  const $el = document.createElement(tagName);
-  $el.classList.add(classes);
-  return $($el);
+  const el = document.createElement(tagName);
+  if (classes) {
+    el.classList.add(classes);
+  }
+  return $(el);
 };
