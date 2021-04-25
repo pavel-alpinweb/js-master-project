@@ -70,6 +70,7 @@ export class Table extends ExcelComponent {
             $resizer.width('auto');
             break;
         }
+        document.onmouseup = null;
         document.onmousemove = null;
       };
     }
