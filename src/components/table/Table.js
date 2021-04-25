@@ -22,6 +22,7 @@ export class Table extends ExcelComponent {
       const $parent = $resizer.closest('[data-type="resizable"]');
       const coords = $parent.getCoords();
       const $tableElement = document.querySelector(`.${Table.className}`);
+      const $cols = this.$root.findAll(`[data-col="${$parent.data.col}"]`);
       let resizeChangeSizeValue = 0;
       let value = 0;
 
@@ -57,8 +58,7 @@ export class Table extends ExcelComponent {
       document.onmouseup = () => {
         switch (resizeType) {
           case 'col':
-            document.querySelectorAll(`[data-col="${$parent.data.col}"]`)
-                .forEach(el => el.style.width = value + 'px');
+            $cols.forEach(el => el.style.width = value + 'px');
             $resizer.removeClass('col-resize--active');
             $resizer.$el.style.right = '0';
             $resizer.height('auto');
