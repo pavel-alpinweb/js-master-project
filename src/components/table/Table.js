@@ -45,12 +45,12 @@ export class Table extends ExcelComponent {
           case 'col':
             delta = e.pageX - coords.right;
             value = coords.width + delta;
-            $resizer.$el.style.right = -delta + 'px';
+            $resizer.css({right: `${-delta}px`});
             break;
           case 'row':
             delta = e.pageY - coords.bottom;
             value = coords.height + delta;
-            $resizer.$el.style.bottom = -delta + 'px';
+            $resizer.css({bottom: `${-delta}px`});
             break;
         }
       };
@@ -60,13 +60,13 @@ export class Table extends ExcelComponent {
           case 'col':
             $cols.forEach(el => el.style.width = value + 'px');
             $resizer.removeClass('col-resize--active');
-            $resizer.$el.style.right = '0';
+            $resizer.css({right: '0px'});
             $resizer.height('auto');
             break;
           case 'row':
             $parent.height(value);
             $resizer.removeClass('row-resize--active');
-            $resizer.$el.style.bottom = '0';
+            $resizer.css({bottom: '0px'});
             $resizer.width('auto');
             break;
         }
