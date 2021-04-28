@@ -79,6 +79,10 @@ class Dom {
     return this.$el.querySelectorAll(selector);
   }
 
+  find(selector) {
+    return $(this.$el.querySelector(selector));
+  }
+
   get data() {
     return this.$el.dataset;
   }
