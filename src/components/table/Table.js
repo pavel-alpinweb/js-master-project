@@ -23,7 +23,7 @@ export class Table extends ExcelComponent {
 
   init() {
     super.init();
-    const $firstCell = this.$root.find('[data-cell="0:0"]');
+    const $firstCell = this.$root.find('[data-id="0:0"]');
     this.selection.select($firstCell);
   }
 
@@ -32,7 +32,7 @@ export class Table extends ExcelComponent {
   }
 
   onClick(event) {
-    if (event.target.dataset.cell) {
+    if (event.target.dataset.type === 'cell') {
       this.selection.select($(event.target));
     }
   }
