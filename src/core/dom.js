@@ -38,6 +38,17 @@ class Dom {
         });
   }
 
+  id(parse) {
+    if (parse) {
+      const parsed = this.id().split(':');
+      return {
+        row: +parsed[0],
+        col: +parsed[1],
+      };
+    }
+    return this.data.id;
+  }
+
   addClass(string = '') {
     this.$el.classList.add(string);
     return this;

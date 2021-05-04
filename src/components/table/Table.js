@@ -3,13 +3,14 @@ import {createTable} from '@/components/table/table.template';
 import resize from '@/components/table/table.resize';
 import {TableSelection} from '@/components/table/TableSelection';
 import {$} from '@core/dom';
+import {matrix} from '@/components/table/table.functions';
 
 export class Table extends ExcelComponent {
   static className = 'excel__table'
 
   constructor($root) {
     super($root, {
-      listeners: ['mousedown', 'click'],
+      listeners: ['mousedown'],
     });
   }
 
@@ -29,11 +30,15 @@ export class Table extends ExcelComponent {
 
   onMousedown(event) {
     resize(event.target, this.$root, Table.className);
-  }
-
-  onClick(event) {
     if (event.target.dataset.type === 'cell') {
-      this.selection.select($(event.target));
+      const $target = $(event.target);
+      if (event.shiftKey) {
+        const $cells = matrix($target, this.selection.current)
+            .map(id => this.$root.find(`[data-id="${id}"]`));
+        this.selection.selectGroup($cells);
+      } else {
+        this.selection.select($target);
+      }
     }
   }
 }
