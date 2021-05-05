@@ -49,6 +49,11 @@ class Dom {
     return this.data.id;
   }
 
+  focus() {
+    this.$el.focus();
+    return this;
+  }
+
   addClass(string = '') {
     this.$el.classList.add(string);
     return this;
