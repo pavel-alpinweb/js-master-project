@@ -13,9 +13,12 @@ class Dom {
     return this.$el.outerHTML.trim();
   }
 
-  text(text) {
+  set text(text) {
     this.$el.textContent = text;
-    return this;
+  }
+
+  get text() {
+    return this.$el.textContent;
   }
 
   width(value = 'auto') {
