@@ -3,15 +3,15 @@ import {createTable} from '@/components/table/table.template';
 import resize from '@/components/table/table.resize';
 import {TableSelection} from '@/components/table/TableSelection';
 import {$} from '@core/dom';
-import {matrix} from '@/components/table/table.functions';
-import {nextSelector} from '@/components/table/table.functions';
+import {matrix, nextSelector} from '@/components/table/table.functions';
 
 export class Table extends ExcelComponent {
   static className = 'excel__table'
 
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
       listeners: ['mousedown', 'keydown'],
+      ...options,
     });
   }
 
@@ -27,6 +27,10 @@ export class Table extends ExcelComponent {
     super.init();
     const $firstCell = this.$root.find('[data-id="0:0"]');
     this.selection.select($firstCell);
+
+    this.$on('formula:input', text => {
+      this.selection.current.text(text);
+    });
   }
 
   onMousedown(event) {
