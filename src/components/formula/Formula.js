@@ -13,18 +13,35 @@ export class Formula extends ExcelComponent {
   toHTML() {
     return `
       <div class="info">fx</div>
-      <div class="input" contenteditable spellcheck="false"></div>
+      <div 
+        id="formila-input" 
+        class="input" 
+        contenteditable 
+        spellcheck="false"
+       ></div>
     `;
+  }
+  init() {
+    super.init();
+
+    this.$formula = this.$root.find('#formila-input');
+
+    this.$on('table:select', $cell => {
+      this.$formula.text = $cell.text;
+    });
+    this.$on('table:input', $cell => {
+      this.$formula.text = $cell.text;
+    });
   }
   onInput(event) {
     const text = event.target.textContent.trim();
     this.$emit('formula:input', text);
   }
   onKeydown(event) {
-    if (event.key === 'Enter') {
+    const keys = ['Enter', 'Tab'];
+    if (keys.includes(event.key)) {
       event.preventDefault();
       const text = event.target.textContent.trim();
-      event.target.textContent = '';
       this.$emit('formula:enter', text);
     }
   }
