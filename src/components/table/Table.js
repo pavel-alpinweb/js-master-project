@@ -35,6 +35,10 @@ export class Table extends ExcelComponent {
       this.selection.current.focus();
       console.log(this.selection.current.text);
     });
+
+    this.$subscribe(state => {
+      console.log('Table state', state);
+    });
   }
 
   selectCell($cell) {
@@ -42,8 +46,17 @@ export class Table extends ExcelComponent {
     this.$emit('table:select', $cell);
   }
 
-  onMousedown(event) {
-    resize(event.target, this.$root, Table.className);
+  async resizeTable(event) {
+    try {
+      const data = await resize(event.target, this.$root, Table.className);
+      this.$dispatch({type: 'TABLE_RESIZE', data});
+    } catch (e) {
+      new Error(e.message);
+    }
+  }
+
+  async onMousedown(event) {
+    await this.resizeTable(event);
     if (event.target.dataset.type === 'cell') {
       const $target = $(event.target);
       if (event.shiftKey) {
@@ -51,7 +64,7 @@ export class Table extends ExcelComponent {
             .map(id => this.$root.find(`[data-id="${id}"]`));
         this.selection.selectGroup($cells);
       } else {
-        this.selection.select($target);
+        this.selectCell($target);
       }
     }
   }
