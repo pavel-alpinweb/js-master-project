@@ -48,10 +48,6 @@ export default function resize(resizeTrigger, $root, tableClassName) {
             $resizer.removeClass('col-resize--active');
             $resizer.css({right: '0px'});
             $resizer.height('auto');
-            resolve({
-              value,
-              id: $parent.data.col,
-            });
             break;
           case 'row':
             $parent.height(value);
@@ -60,6 +56,11 @@ export default function resize(resizeTrigger, $root, tableClassName) {
             $resizer.width('auto');
             break;
         }
+        resolve({
+          value,
+          resizeType,
+          id: $parent.data[resizeType],
+        });
         document.onmouseup = null;
         document.onmousemove = null;
       };
