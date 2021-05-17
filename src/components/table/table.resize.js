@@ -1,8 +1,8 @@
 import {$} from '@core/dom';
 
 export default function resize(resizeTrigger, $root, tableClassName) {
-  return new Promise((resolve) => {
-    if (resizeTrigger.dataset.resize) {
+  if (resizeTrigger.dataset.resize) {
+    return new Promise((resolve) => {
       const $resizer = $(resizeTrigger);
       const resizeType = $resizer.data.resize;
       const $parent = $resizer.closest('[data-type="resizable"]');
@@ -64,6 +64,6 @@ export default function resize(resizeTrigger, $root, tableClassName) {
         document.onmouseup = null;
         document.onmousemove = null;
       };
-    }
-  });
+    });
+  }
 }
