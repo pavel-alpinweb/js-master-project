@@ -11,6 +11,7 @@ export class Table extends ExcelComponent {
 
   constructor($root, options) {
     super($root, {
+      name: 'Table',
       listeners: ['mousedown', 'keydown', 'input'],
       ...options,
     });
@@ -94,7 +95,6 @@ export class Table extends ExcelComponent {
   }
 
   onInput(event) {
-    // this.$emit('table:input', $(event.target));
     this.updateTextInStore($(event.target).text);
   }
 }
