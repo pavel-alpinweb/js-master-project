@@ -3,6 +3,7 @@ import {
   TABLE_RESIZE,
   CHANGE_STYLES,
   APPLY_STYLE,
+  CHANGE_TABLE_NAME,
 } from '@/store/types';
 
 export function tableResize(data) {
@@ -31,5 +32,12 @@ export function applyStyle(data) {
   return {
     type: APPLY_STYLE,
     data,
+  };
+}
+
+export function changeTableName(text) {
+  return {
+    type: CHANGE_TABLE_NAME,
+    text,
   };
 }

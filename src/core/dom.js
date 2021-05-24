@@ -14,11 +14,17 @@ class Dom {
   }
 
   set text(text) {
+    if (this.$el.tagName.toLowerCase() === 'input') {
+      this.$el.value = text.trim();
+    }
     this.$el.textContent = text;
   }
 
   get text() {
-    return this.$el.textContent;
+    if (this.$el.tagName.toLowerCase() === 'input') {
+      return this.$el.value.trim();
+    }
+    return this.$el.textContent.trim();
   }
 
   width(value = 'auto') {
