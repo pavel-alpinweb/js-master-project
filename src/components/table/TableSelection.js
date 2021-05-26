@@ -35,4 +35,8 @@ export class TableSelection {
   applyStyle(style) {
     this.group.forEach($el => $el.css(style));
   }
+
+  applyText(text) {
+    this.group.forEach($el => $el.text = text);
+  }
 }

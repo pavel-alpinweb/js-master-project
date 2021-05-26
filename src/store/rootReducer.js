@@ -9,9 +9,10 @@ import {
 export function rootReducer(state, action) {
   let field;
   let val;
+
   switch (action.type) {
     case TABLE_RESIZE:
-      field = action.data.type === 'col' ? 'colState' : 'rowState';
+      field = action.data.resizeType === 'col' ? 'colState' : 'rowState';
       return {...state, [field]: value(state, field, action)};
     case CHANGE_TEXT:
       field = 'dataState';

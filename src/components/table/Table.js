@@ -32,13 +32,14 @@ export class Table extends ExcelComponent {
     this.selectCell($firstCell);
 
     this.$on('formula:input', text => {
-      this.selection.current.text = text;
-      this.updateTextInStore(text);
+      this.selection.applyText(text);
+      this.updateTextInStore();
     });
     this.$on('formula:enter', text => {
       this.selection.current.focus();
     });
     this.$on('toolbar:applyStyle', value => {
+      console.log(this.selection.group);
       this.selection.applyStyle(value);
       this.$dispatch(actions.applyStyle({
         value,
@@ -97,15 +98,17 @@ export class Table extends ExcelComponent {
     }
   }
 
-  updateTextInStore(text) {
-    this.$dispatch(actions.changeText({
-      id: this.selection.current.id(),
-      text: text,
-    }));
+  updateTextInStore() {
+    this.selection.group.forEach(($el) => {
+      this.$dispatch(actions.changeText({
+        id: $el.id(),
+        value: $el.text,
+      }));
+    });
   }
 
   onInput(event) {
-    this.updateTextInStore($(event.target).text);
+    this.updateTextInStore();
   }
 }
 
