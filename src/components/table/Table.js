@@ -6,6 +6,7 @@ import {$} from '@core/dom';
 import {matrix, nextSelector} from '@/components/table/table.functions';
 import * as actions from '@/store/actions';
 import {defaultStyles} from '@/constants';
+import {parse} from '@core/parse';
 
 export class Table extends ExcelComponent {
   static className = 'excel__table'
@@ -32,14 +33,14 @@ export class Table extends ExcelComponent {
     this.selectCell($firstCell);
 
     this.$on('formula:input', text => {
-      this.selection.applyText(text);
+      this.selection.current.attr('data-value', text);
+      this.selection.applyText(parse(text));
       this.updateTextInStore();
     });
     this.$on('formula:enter', text => {
       this.selection.current.focus();
     });
     this.$on('toolbar:applyStyle', value => {
-      console.log(this.selection.group);
       this.selection.applyStyle(value);
       this.$dispatch(actions.applyStyle({
         value,
