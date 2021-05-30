@@ -36,7 +36,12 @@ export class TableSelection {
     this.group.forEach($el => $el.css(style));
   }
 
-  applyText(text) {
-    this.group.forEach($el => $el.text = text);
+  applyText(parseText, initialText) {
+    this.group.forEach(
+        $el => {
+          $el.text = parseText;
+          $el.attr('data-value', initialText);
+        }
+    );
   }
 }
