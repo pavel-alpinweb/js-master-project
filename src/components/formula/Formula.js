@@ -1,4 +1,5 @@
 import {ExcelComponent} from '@core/ExcelComponent';
+import {TableSelection} from '@/components/table/TableSelection';
 
 export class Formula extends ExcelComponent {
   static className = 'excel__formula';
@@ -22,17 +23,23 @@ export class Formula extends ExcelComponent {
        ></div>
     `;
   }
+
+  prepare() {
+    this.selection = new TableSelection();
+  }
+
   init() {
     super.init();
 
     this.$formula = this.$root.find('#formila-input');
 
     this.$on('table:select', $cell => {
-      this.$formula.text = $cell.text;
+      this.$formula.text = $cell.data.value;
     });
-  }
-  storeChanged({currentText}) {
-    this.$formula.text = currentText;
+    this.$on('table:input', text => {
+      console.log(text);
+      this.$formula.text = text;
+    });
   }
   onInput(event) {
     const text = event.target.textContent.trim();

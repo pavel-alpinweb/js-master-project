@@ -3,11 +3,10 @@ import {Emitter} from '@core/Emitter';
 import {StoreSubscriber} from '@core/StoreSubscriber';
 
 export class Excel {
-  constructor(selector, options) {
-    this.$el = $(selector);
+  constructor(options) {
     this.components = options.components || [];
-    this.emitter = new Emitter();
     this.store = options.store;
+    this.emitter = new Emitter();
     this.subscriber = new StoreSubscriber(this.store);
   }
 
@@ -30,12 +29,11 @@ export class Excel {
     return $root;
   }
 
-  render() {
-    this.$el.append(this.getRoot());
-
+  init() {
     this.subscriber.subscribeComponents(this.components);
-    this.components.forEach((component) => component.init());
+    this.components.forEach(component => component.init());
   }
+
 
   destroy() {
     this.subscriber.unsubscribeFromStore();

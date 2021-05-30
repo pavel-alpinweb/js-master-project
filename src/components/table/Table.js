@@ -33,8 +33,10 @@ export class Table extends ExcelComponent {
     this.selectCell($firstCell);
 
     this.$on('formula:input', text => {
-      this.selection.current.attr('data-value', text);
-      this.selection.applyText(parse(text));
+      this.selection.applyText(
+          parse(text),
+          text,
+      );
       this.updateTextInStore();
     });
     this.$on('formula:enter', text => {
@@ -109,6 +111,7 @@ export class Table extends ExcelComponent {
   }
 
   onInput(event) {
+    this.$emit('table:input', this.selection.current.text);
     this.updateTextInStore();
   }
 }
