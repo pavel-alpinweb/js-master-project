@@ -34,6 +34,7 @@ export class ExcelPage extends Page {
   }
 
   destroy() {
+    console.log('destroy');
     this.excel.destroy();
   }
 }
