@@ -22,9 +22,10 @@ export class Router {
   }
 
   changePageHandler() {
-    this.$placeholder.html('');
+    this.$placeholder.clear();
     if (this.currentPage) this.currentPage.destroy();
-    const currentPath = ActiveRoute.path;
+    const currentPath = ActiveRoute.page;
+    console.log(currentPath);
     const Page = this.routes[currentPath] || this.routes.dashboard;
     this.currentPage = new Page();
     this.$placeholder.append(this.currentPage.getRoot());
