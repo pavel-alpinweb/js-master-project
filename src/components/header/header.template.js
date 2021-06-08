@@ -9,12 +9,14 @@ export function createHeader() {
 
       <div>
 
-        <div class="button">
-          <i class="material-icons">delete</i>
+        <div class="button" data-delete>
+          <i class="material-icons" data-action="delete">delete</i>
         </div>
 
         <div class="button">
-          <i class="material-icons">exit_to_app</i>
+          <a href="#dashboard">
+            <i class="material-icons">exit_to_app</i>
+          </a>
         </div>
 
       </div>

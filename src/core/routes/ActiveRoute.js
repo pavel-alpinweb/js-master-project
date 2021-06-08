@@ -6,6 +6,7 @@ export class ActiveRoute {
   static get param() {
     return ActiveRoute.path.split('/')[1];
   }
+
   static get page() {
     return ActiveRoute.path.split('/')[0];
   }
