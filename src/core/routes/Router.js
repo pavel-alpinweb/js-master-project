@@ -27,7 +27,7 @@ export class Router {
     const currentPath = ActiveRoute.page;
     console.log(currentPath);
     const Page = this.routes[currentPath] || this.routes.dashboard;
-    this.currentPage = new Page();
+    this.currentPage = new Page(ActiveRoute.param);
     this.$placeholder.append(this.currentPage.getRoot());
 
     this.currentPage.afterRender();

@@ -1,14 +1,17 @@
-function toHTML() {
+import {storage} from '@core/utils';
+
+function toHTML(key) {
+  const id = key.replace('excel:', '');
+  const table = storage(key);
+  const date = new Date(Number(id));
   return `
     <li class="db__record">
-      <a href="#">Таблица номер 1</a>
-      <strong>12.06.2020</strong>
+      <a href="#excel/${id}">${table.tableName}</a>
+      <strong>${date.toLocaleString('ru-RU')}</strong>
     </li>
   `;
 }
 
-// excel:12312
-// excel:1232112
 function getAllKeys() {
   const keys = [];
   for (let i = 0; i < localStorage.length; i++) {
@@ -35,7 +38,9 @@ export function createRecordsTable() {
     </div>
 
     <ul class="db__list">
-      ${keys.map(toHTML).join('')}
+      ${keys.map((key) => {
+    return toHTML(key);
+  }).join('')}
     </ul>
   `;
 }
