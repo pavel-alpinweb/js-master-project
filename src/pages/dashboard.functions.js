@@ -38,9 +38,7 @@ export function createRecordsTable() {
     </div>
 
     <ul class="db__list">
-      ${keys.map((key) => {
-    return toHTML(key);
-  }).join('')}
+      ${keys.map(toHTML).join('')}
     </ul>
   `;
 }
