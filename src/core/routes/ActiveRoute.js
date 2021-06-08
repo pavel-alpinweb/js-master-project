@@ -10,4 +10,8 @@ export class ActiveRoute {
   static get page() {
     return ActiveRoute.path.split('/')[0];
   }
+
+  static routePush(path) {
+    window.location.replace(`#${path}`);
+  }
 }
