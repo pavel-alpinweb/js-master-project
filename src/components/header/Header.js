@@ -28,8 +28,11 @@ export class Header extends ExcelComponent {
     const target = $(event.target);
     if (target.data.action === 'delete') {
       const id = ActiveRoute.param;
-      localStorage.removeItem(`excel:${id}`);
-      ActiveRoute.push('dashboard');
+      const decision = confirm('Удалить текущую таблицу?');
+      if (decision) {
+        localStorage.removeItem(`excel:${id}`);
+        ActiveRoute.push('dashboard');
+      }
     }
   }
 }
