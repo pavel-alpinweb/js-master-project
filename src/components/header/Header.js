@@ -29,7 +29,7 @@ export class Header extends ExcelComponent {
     if (target.data.action === 'delete') {
       const id = ActiveRoute.param;
       localStorage.removeItem(`excel:${id}`);
-      ActiveRoute.routePush('dashboard');
+      ActiveRoute.push('dashboard');
     }
   }
 }

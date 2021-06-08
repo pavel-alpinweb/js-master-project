@@ -11,7 +11,7 @@ export class ActiveRoute {
     return ActiveRoute.path.split('/')[0];
   }
 
-  static routePush(path) {
+  static push(path) {
     window.location.replace(`#${path}`);
   }
 }
