@@ -3,7 +3,7 @@ import {storage} from '@core/utils';
 function toHTML(key) {
   const id = key.replace('excel:', '');
   const table = storage(key);
-  const date = new Date(Number(id));
+  const date = new Date(Number(table.openTime));
   return `
     <li class="db__record">
       <a href="#excel/${id}">${table.tableName}</a>

@@ -3,7 +3,7 @@ import {
   CHANGE_STYLES,
   TABLE_RESIZE,
   APPLY_STYLE,
-  CHANGE_TABLE_NAME,
+  CHANGE_TABLE_NAME, TABLE_OPEN_TIME,
 } from './types';
 
 export function rootReducer(state, action) {
@@ -38,6 +38,12 @@ export function rootReducer(state, action) {
       return {
         ...state,
         tableName: action.text,
+      };
+    case TABLE_OPEN_TIME:
+      console.log('UTS', action.uts);
+      return {
+        ...state,
+        openTime: action.uts,
       };
     default: return state;
   }

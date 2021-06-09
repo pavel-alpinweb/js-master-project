@@ -9,6 +9,7 @@ const defaultState = {
   currentText: '',
   currentStyles: defaultStyles,
   tableName: 'Test table',
+  openTime: 0,
 };
 
 const normalize = state => ({

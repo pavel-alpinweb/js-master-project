@@ -4,6 +4,7 @@ import {
   CHANGE_STYLES,
   APPLY_STYLE,
   CHANGE_TABLE_NAME,
+  TABLE_OPEN_TIME,
 } from '@/store/types';
 
 export function tableResize(data) {
@@ -39,5 +40,12 @@ export function changeTableName(text) {
   return {
     type: CHANGE_TABLE_NAME,
     text,
+  };
+}
+
+export function changeTableOpenTime(uts) {
+  return {
+    type: TABLE_OPEN_TIME,
+    uts,
   };
 }
