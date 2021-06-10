@@ -14,6 +14,10 @@ export class TableSelection {
     }
   }
 
+  get selectedIds() {
+    return this.group.map($el => $el.id());
+  }
+
   select($el) {
     this.clear();
     this.group.push($el);
@@ -26,5 +30,18 @@ export class TableSelection {
 
     this.group = $group;
     this.group.forEach($el => $el.addClass(TableSelection.cellActiveClassName));
+  }
+
+  applyStyle(style) {
+    this.group.forEach($el => $el.css(style));
+  }
+
+  applyText(parseText, initialText) {
+    this.group.forEach(
+        $el => {
+          $el.text = parseText;
+          $el.attr('data-value', initialText);
+        }
+    );
   }
 }

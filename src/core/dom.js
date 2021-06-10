@@ -14,11 +14,17 @@ class Dom {
   }
 
   set text(text) {
+    if (this.$el.tagName.toLowerCase() === 'input') {
+      this.$el.value = text.trim();
+    }
     this.$el.textContent = text;
   }
 
   get text() {
-    return this.$el.textContent;
+    if (this.$el.tagName.toLowerCase() === 'input') {
+      return this.$el.value.trim();
+    }
+    return this.$el.textContent.trim();
   }
 
   width(value = 'auto') {
@@ -46,6 +52,13 @@ class Dom {
         });
   }
 
+  getStyles(styles = []) {
+    return styles.reduce((res, s) => {
+      res[s] = this.$el.style[s];
+      return res;
+    }, {});
+  }
+
   id(parse) {
     if (parse) {
       const parsed = this.id().split(':');
@@ -60,6 +73,14 @@ class Dom {
   focus() {
     this.$el.focus();
     return this;
+  }
+
+  attr(name, value) {
+    if (value) {
+      this.$el.setAttribute(name, value);
+      return this;
+    }
+    return this.$el.getAttribute(name);
   }
 
   addClass(string = '') {
