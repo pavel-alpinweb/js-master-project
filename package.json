@@ -10,6 +10,12 @@
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "lint": "npx eslint ./src"
   },
+  "jest": {
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1",
+      "^@core/(.*)$": "<rootDir>/src/core/$1"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pavel-alpinweb/js-master-project.git"
